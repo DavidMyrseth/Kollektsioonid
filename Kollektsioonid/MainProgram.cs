@@ -22,7 +22,7 @@ namespace Kollektsioonid
                 switch (choice)
                 {
                     case 1:
-                        Ulesanne1.Execute();
+                        Ulesanne1.Vikto();
                         break;
                     case 2:
                         Ulesanne2.Execute();

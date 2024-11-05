@@ -98,35 +98,43 @@
 
         public static void Vikto()
         {
-            Console.Write("Введите начало диапазона: ");
-            int start = int.Parse(Console.ReadLine());
-            Console.Write("Введите конец диапазона: ");
-            int end = int.Parse(Console.ReadLine());
+            Random rand = new Random();
 
-            if (start >= end)
+            Console.Write("Введите минимальное значение д: ");
+            int lower = int.Parse(Console.ReadLine());
+
+            Console.Write("Введите максимальное значение д: ");
+            int higher = int.Parse(Console.ReadLine());
+
+            if (lower >= higher)
             {
-                Console.WriteLine("Ошибка: начало диапазона должно быть меньше конца");
+                Console.WriteLine("Ошибка: минимальное число должно быть меньше максимального.");
                 return;
             }
 
-            int numberToGuess = new Random().Next(start, end + 1);
-            Console.WriteLine($"Я задумал число от {start} до {end}. Попробуй угадать!");
+            int number = rand.Next(lower + 1, higher);
 
-            while (true)
+            Console.WriteLine($"Загадал число между {lower} и {higher}. Попробуйте угадать!");
+
+            int triesCount = 0;
+            int userInput;
+
+            do
             {
-                Console.Write("Введите ваше предположение: ");
-                int guess = int.Parse(Console.ReadLine());
+                Console.Write("Введите ваше число: ");
+                userInput = int.Parse(Console.ReadLine());
+                triesCount++;
 
-                if (guess < numberToGuess)
-                    Console.WriteLine("Слишком мало! Попробуй еще раз");
-                else if (guess > numberToGuess)
-                    Console.WriteLine("Слишком много! Попробуй еще раз");
+                if (userInput == number)
+                {
+                    Console.WriteLine($"Правильно! Загаданное число {number}. Количество попыток: {triesCount}");
+                }
                 else
                 {
-                    Console.WriteLine($"Поздравляю! Вы угадали число {numberToGuess}");
-                    break;
+                    Console.WriteLine(userInput < number ? "Загаданное число больше." : "Загаданное число меньше.");
                 }
-            }
+
+            } while (userInput != number);
         }
     }
 }
